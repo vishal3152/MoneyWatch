@@ -50,6 +50,11 @@ describe("createTranslator", () => {
   it("exposes the active locale", () => {
     expect(createTranslator("ar", getCatalog("ar")).locale).toBe("ar");
   });
+
+  it("echoes a missing key instead of crashing", () => {
+    const t = createTranslator("en", {});
+    expect(t.t("absent.key" as never)).toBe("absent.key");
+  });
 });
 
 const placeholders = (value: string) => (value.match(/\{[a-zA-Z]+\}/g) ?? []).sort();

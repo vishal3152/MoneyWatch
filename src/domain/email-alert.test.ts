@@ -73,6 +73,12 @@ describe("validateParsedEmailAlert", () => {
     ).toBe("RBL Bank");
   });
 
+  it("accepts an occurredAt with surrounding whitespace and stores it trimmed", () => {
+    expect(
+      validateParsedEmailAlert({ ...validRblAlert, occurredAt: " 2026-09-09 " }).occurredAt
+    ).toBe("2026-09-09");
+  });
+
   it("rejects an amount with a thousands separator", () => {
     expect(() => validateParsedEmailAlert({ ...validRblAlert, amount: "1,282.05" })).toThrow(
       InvalidEmailAlertError

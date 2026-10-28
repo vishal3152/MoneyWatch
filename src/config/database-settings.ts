@@ -10,7 +10,7 @@ export type DatabaseSettings = Record<string, unknown> & {
 };
 
 export function getDatabaseSettingsPath(): string {
-  return join(homedir(), ".config", "paisa-watch", "settings.json");
+  return join(homedir(), ".config", "money-watch", "settings.json");
 }
 
 export function readSettings(): Partial<DatabaseSettings> {

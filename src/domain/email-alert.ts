@@ -78,7 +78,7 @@ function isValidCalendarDateString(value: unknown): boolean {
     return false;
   }
   try {
-    assertValidCalendarDate(value);
+    assertValidCalendarDate(value.trim());
     return true;
   } catch (error) {
     if (error instanceof InvalidCalendarDateError) {
@@ -155,7 +155,7 @@ export function validateEmailAlertFields(raw: unknown): EmailAlertValidation {
       direction: alert.direction as EmailAlertDirection,
       amount: alert.amount as string,
       currencyCode: (alert.currencyCode as string).trim().toUpperCase(),
-      occurredAt: alert.occurredAt as string,
+      occurredAt: (alert.occurredAt as string).trim(),
       accountNumberSuffix: (alert.accountNumberSuffix as string).trim(),
       institutionName: (alert.institutionName as string).trim(),
       description: alert.description as string,
@@ -186,7 +186,7 @@ export function validateImportableEmailAlert(raw: unknown): ImportableEmailAlert
       direction: values.direction as EmailAlertDirection,
       amount: values.amount as string,
       currencyCode: (values.currencyCode as string).trim().toUpperCase(),
-      occurredAt: values.occurredAt as string,
+      occurredAt: (values.occurredAt as string).trim(),
       description: values.description as string
     }
   };

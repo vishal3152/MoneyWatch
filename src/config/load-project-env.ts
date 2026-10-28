@@ -15,7 +15,14 @@ function parseEnvFile(contents: string): Record<string, string> {
       continue;
     }
 
-    const key = line.slice(0, separator).trim();
+    let key = line.slice(0, separator).trim();
+    // Accept the `export KEY=value` form common in shell-managed .env files.
+    if (key === "export" || key.startsWith("export ")) {
+      key = key.slice("export".length).trim();
+      if (key.length === 0) {
+        continue;
+      }
+    }
     let value = line.slice(separator + 1).trim();
     if (
       (value.startsWith('"') && value.endsWith('"')) ||

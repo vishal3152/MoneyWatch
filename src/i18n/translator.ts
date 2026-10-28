@@ -54,8 +54,10 @@ export function createTranslator(
 
   return {
     locale,
-    t: (key, params) => interpolate(catalog[key], params),
-    text: ({ key, params }) => interpolate(catalog[key], params),
+    // A key missing from a hand-built catalog echoes itself instead of crashing
+    // render on undefined.replace; complete catalogs (getCatalog) never hit this.
+    t: (key, params) => interpolate(catalog[key] ?? key, params),
+    text: ({ key, params }) => interpolate(catalog[key] ?? key, params),
     plural: (key, count, params) => {
       // Arabic selects zero/two/few/many too; the catalogs author one/other only.
       const category = pluralRules.select(count);

@@ -2,7 +2,7 @@ import { join, resolve } from "node:path";
 
 import { readDatabasePathFromSettings } from "@/config/database-settings";
 
-export const defaultDatabasePath = join(process.cwd(), "paisa-watch.db");
+export const defaultDatabasePath = join(process.cwd(), "money-watch.db");
 
 export function resolveDatabasePath(explicitPath?: string): string {
   if (explicitPath !== undefined && explicitPath.trim().length > 0) {

@@ -46,6 +46,19 @@ describe("assertValidTransferLegs", () => {
     ).toThrow(InvalidTransferLegsError);
   });
 
+  it("rejects legs that are undefined or empty rather than counting them as present", () => {
+    expect(() =>
+      assertValidTransferLegs(
+        makeTransfer({ sourceAccountId: undefined as unknown as null, sourceFixedDepositId: null })
+      )
+    ).toThrow(InvalidTransferLegsError);
+    expect(() =>
+      assertValidTransferLegs(
+        makeTransfer({ sourceAccountId: "", sourceFixedDepositId: null })
+      )
+    ).toThrow(InvalidTransferLegsError);
+  });
+
   it("rejects a Transfer whose source and destination Account are the same", () => {
     expect(() =>
       assertValidTransferLegs(makeTransfer({ sourceAccountId: "acc-1", destinationAccountId: "acc-1" }))

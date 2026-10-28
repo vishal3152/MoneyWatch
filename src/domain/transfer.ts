@@ -43,7 +43,12 @@ export class InvalidTransferAmountsError extends Error {
 }
 
 function assertExactlyOneLeg(accountId: string | null, fixedDepositId: string | null, side: "source" | "destination") {
-  const legCount = [accountId, fixedDepositId].filter((id) => id !== null).length;
+  // Only a non-empty string counts as a leg: at runtime a leg can arrive as
+  // undefined or "" (partial objects, unchecked casts), and `!== null` alone
+  // would have counted those as a present leg pointing nowhere.
+  const legCount = [accountId, fixedDepositId].filter(
+    (id): id is string => typeof id === "string" && id.length > 0
+  ).length;
 
   if (legCount !== 1) {
     throw new InvalidTransferLegsError(

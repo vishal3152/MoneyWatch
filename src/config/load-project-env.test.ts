@@ -47,6 +47,18 @@ describe("loadProjectEnvFiles", () => {
     expect(env.OTHER).toBe("from-env");
   });
 
+  it("accepts the export KEY=value form", () => {
+    const dir = mkdtempSync(join(tmpdir(), "money-watch-env-"));
+    tempDirs.push(dir);
+    writeFileSync(join(dir, ".env"), 'export POSTGRES_URL=from-export\nexport QUOTED="spaced value"\n');
+
+    const env: Record<string, string | undefined> = {};
+    loadProjectEnvFiles(dir, env);
+
+    expect(env.POSTGRES_URL).toBe("from-export");
+    expect(env.QUOTED).toBe("spaced value");
+  });
+
   it("ignores missing env files", () => {
     const dir = mkdtempSync(join(tmpdir(), "paisa-watch-env-"));
     tempDirs.push(dir);
