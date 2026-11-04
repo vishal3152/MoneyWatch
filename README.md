@@ -451,7 +451,7 @@ Possible contributions: bank-alert parser fixtures, a local↔cloud migration to
 
 ## License
 
-PolyForm-Noncommercial-1.0.0 (see the `license` field in `package.json`). Note: the repo doesn't currently ship a `LICENSE` file — one should be added to make the terms explicit.
+[PolyForm Noncommercial 1.0.0](LICENSE). Free for personal and other noncommercial use. Commercial use — including selling the software, offering it as a paid hosted service, or using it in revenue-generating business operations — requires a separate commercial license. Contact the maintainer via a GitHub issue to arrange one.
 
 ---
 
