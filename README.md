@@ -79,7 +79,7 @@ DEPLOYMENT_MODE=local pnpm exec next dev
 
 That's the entire setup. **No `.env` file is required for local mode** — the `./paisa-watch.db` file is created and migrated automatically on first run. No accounts, no keys, no Docker. Point `DATABASE_PATH` at a Dropbox/iCloud/Syncthing folder and your data follows you.
 
-Prefer a native window? `pnpm electron:dev` runs the same app as a desktop app (the database migrates on start); `pnpm electron:start` runs it against a production build. **The Electron desktop app is always local** — it forces `DEPLOYMENT_MODE=local`, has no storage-mode switch, and never loads the Supabase SDK. ([ADR-0007](docs/adr/0007-electron-desktop-is-local-only.md))
+Prefer a native window? **Download the installer — no build needed:** the [latest release](https://github.com/vishal3152/MoneyWatch/releases/latest) ships a macOS `.dmg`/`.zip` (Apple Silicon) and a Windows `.exe` installer (`v0.1.0` today). Or run it from source: `pnpm electron:dev` starts the desktop app, `pnpm electron:start` runs it against a production build (the database migrates on start either way). **The Electron desktop app is always local** — it forces `DEPLOYMENT_MODE=local`, has no storage-mode switch, and never loads the Supabase SDK. ([ADR-0007](docs/adr/0007-electron-desktop-is-local-only.md))
 
 > ⚠️ **Heads-up:** the `dev` and `start` scripts in `package.json` are wired for **cloud** mode (they run the Postgres migration step and set `DEPLOYMENT_MODE=cloud`). For local SQLite mode in a browser, use `pnpm exec next dev` / `pnpm exec next start` as shown above.
 
