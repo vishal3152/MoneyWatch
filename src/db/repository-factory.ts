@@ -1,3 +1,6 @@
+// THE tier seam (CODEMAP invariant): the only module allowed to choose
+// SQLite vs Postgres. Local mode -> SQLite; cloud mode + signed-in Owner ->
+// Pg* repositories; cloud mode without an Owner throws (never SQLite).
 import { isCloudMode } from "@/config/deployment-mode";
 import { resolvePostgresConnectionString } from "@/config/postgres-connection";
 import type { DrizzleDb } from "@/db/client";

@@ -6,6 +6,10 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 
+// Local SQLite wiring: Drizzle over better-sqlite3. Connections are shared
+// per resolved path via a global map (survives Next.js HMR), and each path is
+// migrated once per process. Cloud/Postgres modules must stay out of this
+// graph (bundling invariant) — cross-tier code uses dynamic import() instead.
 import { resolveDatabasePath } from "@/config/resolve-database-path";
 import { DatabaseError } from "@/db/errors";
 import * as schema from "@/db/schema";

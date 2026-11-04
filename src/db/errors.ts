@@ -1,3 +1,7 @@
+// Typed DB errors. Domain/db code throws these; API route handlers are the
+// boundary that catches and maps them to responses (never throw raw driver
+// errors past the repository layer). Messages stay English; UI localizes via
+// src/app/domain-error-text.ts.
 export class DatabaseError extends Error {
   constructor(message: string, options?: ErrorOptions) {
     super(message, options);

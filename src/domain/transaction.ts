@@ -1,7 +1,12 @@
 import type { TransactionCategory } from "@/domain/transaction-category";
 
+// Trust status: "Confirmed" = human-entered or reviewed; "Imported" = arrived
+// via an automated feed (MCP/email import) and not yet reviewed.
 export type TrustStatus = "Confirmed" | "Imported";
 
+// One ledger line. Signed amountMinor in integer minor units (credit
+// positive, debit negative). transferId links the two legs of a Transfer;
+// importBatchId links rows staged through an import batch.
 export type Transaction = {
   id: string;
   accountId: string;
@@ -30,6 +35,8 @@ export class InvalidTransactionTimestampError extends Error {
   }
 }
 
+// Accepts any Date-parseable timestamp, rejects garbage loudly, and returns
+// the canonical ISO form so ledger ordering/comparison stays consistent.
 export function normalizeTransactionTimestamp(timestamp: string): string {
   const date = new Date(timestamp);
 

@@ -4,6 +4,9 @@ import { readDatabasePathFromSettings } from "@/config/database-settings";
 
 export const defaultDatabasePath = join(process.cwd(), "money-watch.db");
 
+// Precedence: explicit arg > DATABASE_PATH env > saved desktop setting >
+// ./money-watch.db default. Never hardcode the DB path elsewhere — this is
+// what lets users point data at a synced folder (Dropbox/iCloud).
 export function resolveDatabasePath(explicitPath?: string): string {
   if (explicitPath !== undefined && explicitPath.trim().length > 0) {
     return resolve(explicitPath.trim());

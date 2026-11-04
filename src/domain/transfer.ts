@@ -1,5 +1,8 @@
 import { getMinorUnitExponent } from "@/domain/currency";
 
+// A Transfer is ONE entity with two legs (source + destination), never two
+// disconnected Transactions. Each leg points at exactly one holder: either an
+// Account or a FixedDeposit (enforced by assertValidTransferLegs below).
 export type Transfer = {
   id: string;
   sourceAccountId: string | null;
@@ -15,6 +18,8 @@ export type Transfer = {
   purpose: TransferPurpose;
 };
 
+// "general" = plain Account-to-Account. The fixed-deposit-* purposes only
+// describe legs into/out of a FixedDeposit (see assertValidTransferPurpose).
 export type TransferPurpose =
   | "general"
   | "fixed-deposit-opening"
@@ -122,6 +127,9 @@ export function assertValidTransferAmounts(transfer: Transfer): void {
   }
 }
 
+// The FX rate ACTUALLY realised by this transfer (destination major units per
+// source major unit). Derived from the two leg amounts, not a market rate —
+// so a bad rate is itself a signal. A display ratio, not stored money.
 export function realizedFxRate(transfer: Transfer): number {
   const sourceUnits = transfer.sourceAmountMinor / 10 ** getMinorUnitExponent(transfer.sourceCurrencyCode);
   const destinationUnits =
