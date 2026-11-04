@@ -20,7 +20,7 @@ forced anyone to think about them.
 
 - `DATABASE_PATH=/tmp/pw-qa/qa.db pnpm dev --port 3111`
 - Start every block from a clean database unless the case says otherwise.
-- "Today" in the reference run: **2026-09-05**. Cases that depend on past/future use
+- "Today" in the reference run: **2026-10-28**. Cases that depend on past/future use
   explicit dates relative to that.
 
 ## Fixtures

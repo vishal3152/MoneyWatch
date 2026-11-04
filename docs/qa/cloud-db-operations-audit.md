@@ -1,10 +1,10 @@
 # Cloud-mode DB operations audit
 
-**Date:** 2026-09-14  
+**Date:** 2026-10-28  
 **Mode:** `DEPLOYMENT_MODE=cloud` (Next.js against Postgres via `SUPABASE_DB_URL`)  
 **Out of scope:** email alert sync / IMAP, MCP import (`/api/mcp/**`, `/settings/mcp/**`, `/imports/**`, unresolved email alerts)
 
-## 2026-10-23 navigation performance pass
+## 2026-10-28 navigation performance pass
 
 The original measurements below remain the cloud baseline. A new red-capable harness is available as `pnpm perf:navigation`; it reports cold TTFB/total time, warm p50/p95, and exits non-zero when a route exceeds `PERF_MAX_WARM_P95_MS`.
 
@@ -185,7 +185,7 @@ Notes: Already batched for balances / open discrepancies / stock txs (no per-acc
 
 ## Optimization plan
 
-### Phase 0 — Measure (done 2026-09-14)
+### Phase 0 — Measure (done 2026-10-28)
 
 Live `[sql]` timings captured after sign-in on a real Owner (Appendix A). Re-run after Phase 1 changes to confirm deltas.
 
@@ -265,7 +265,7 @@ Do **not** start with a mega `listDashboardPayload` until Phase 0 proves the das
 
 ---
 
-## Appendix A — Live capture (2026-09-14, signed-in)
+## Appendix A — Live capture (2026-10-28, signed-in)
 
 Wall-clock = first→last `[sql]` timestamp in an isolated batch (excludes Auth). Pool `max: 3` produces ~250ms stair-steps.
 

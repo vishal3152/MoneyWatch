@@ -14,12 +14,12 @@ describe("MarketingLanding", () => {
     expect(html).toContain("Know what you have. Trust every balance.");
     expect(html).toContain("personal finance tracker");
     expect(html).toContain("Money spread across banks and currencies is hard to keep straight");
-    expect(html).toContain("reconcile your records against reported balances");
+    expect(html).toContain("against the bank&#x27;s reported numbers");
     expect(html).toContain("See each currency clearly");
     expect(html).toContain('href="/login"');
     expect(html).toContain("Sign in to Money Watch");
     expect(html).toContain('href="https://github.com/vishal3152/Money-Watch"');
-    expect(html).toContain("Local host");
+    expect(html).toContain("Run it yourself");
     expect(html).toContain('src="/marketing/dashboard-demo.png"');
     expect(html).toContain("sample data");
   });
@@ -44,11 +44,11 @@ describe("MarketingLanding", () => {
     const translator = createTranslator("en", getCatalog("en"));
     const html = renderToStaticMarkup(createElement(MarketingLanding, { t: translator.t }));
 
-    expect(html).toContain("Local hosted");
-    expect(html).toContain("Run it as a desktop app on your own computer");
-    expect(html).toContain("One SQLite file");
+    expect(html).toContain("Self-hosted");
+    expect(html).toContain("Run it as a desktop app, or host it on your own server");
+    expect(html).toContain("single SQLite file");
     expect(html).toContain("No account or login in local mode");
-    expect(html).toContain("No telemetry, analytics, or crash reporting");
+    expect(html).toContain("No trackers, analytics, or crash reporting in the app");
     expect(html).toContain("Money Watch never asks for your online banking login");
     expect(html).toContain("Local mode makes no network calls unless you enable email sync");
     expect(html).toContain("On a local hosted install");
@@ -56,8 +56,6 @@ describe("MarketingLanding", () => {
     expect(html).toContain("Email alert text goes to the LLM host you configure");
     expect(html).toContain("Unclear matches wait for you instead of being guessed");
     expect(html).not.toContain("matches the right account");
-    expect(html).not.toContain("self-hosted");
-    expect(html).not.toContain("Self-host");
   });
 
   it("provides localized search metadata for each supported language", () => {
@@ -66,10 +64,10 @@ describe("MarketingLanding", () => {
     const arabic = getMarketingMetadata("ar");
 
     expect(english.title).toContain("Multi-Currency Personal Finance Tracker");
-    expect(english.description).toContain("Reconcile balances");
+    expect(english.description).toContain("Reconcile every balance");
     expect(chinese.title).toContain("多币种");
-    expect(chinese.description).toContain("核对余额");
+    expect(chinese.description).toContain("核对每个余额");
     expect(arabic.title).toContain("متعدد العملات");
-    expect(arabic.description).toContain("طابق الأرصدة");
+    expect(arabic.description).toContain("طابق كل رصيد");
   });
 });

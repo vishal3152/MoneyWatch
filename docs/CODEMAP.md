@@ -1,6 +1,6 @@
 # Code Map
 
-Where modules live, what each is responsible for, and how they depend on each other. `CONTEXT.md` defines domain language, `docs/specs/` defines intended feature behavior, and `docs/adr/` records architectural decisions. Change history belongs in commit messages, specs, and ADRs — not here.
+Where modules live, what each is responsible for, and how they depend on each other. `docs/specs/` defines both domain vocabulary and intended feature behavior, and `docs/adr/` records architectural decisions. Change history belongs in commit messages, specs, and ADRs — not here.
 
 ## Table of contents
 
@@ -34,7 +34,7 @@ Where modules live, what each is responsible for, and how they depend on each ot
 Signed-out cloud visitors see the public marketing page; signed-in cloud and local users see the dashboard. The dashboard shows a welcome state with one Add Institution link whenever no Institutions exist. Once one exists, it shows the regular dashboard. Copy lives in the three locale catalogs; `.pw-onboarding` styles the welcome state.
 
 
-- **Built:** every `CONTEXT.md` entity (Institution, Account, Transaction, BalanceSnapshot, FixedDeposit, Transfer, Reconciliation, Discrepancy, Adjustment) plus ImportBatch, ShareTradingAccount, StockTransaction, and StockImportBatch, each with a domain seam, a SQLite repository, a Postgres repository, and UI. The full route map in `docs/specs/ui.md` is implemented.
+- **Built:** every domain entity (Institution, Account, Transaction, BalanceSnapshot, FixedDeposit, Transfer, Reconciliation, Discrepancy, Adjustment) plus ImportBatch, ShareTradingAccount, StockTransaction, and StockImportBatch, each with a domain seam, a SQLite repository, a Postgres repository, and UI. The full route map in `docs/specs/ui.md` is implemented.
 - **Tiers:** local/self-hosted (SQLite) and desktop (Electron, SQLite-only, ADR-0007) are complete. The cloud tier (Postgres + Supabase Auth or `AUTH_PROVIDER=simple`, ADR-0006/ADR-0015) serves every screen and Server Action except dev-only `/dev/seed`.
 - **Import paths:** MCP import (local loopback; cloud via bearer token, ADR-0011) and email alert sync (local daemon; cloud Vercel Cron, ADR-0010).
 - **Known gaps:**
@@ -62,7 +62,7 @@ Signed-out cloud visitors see the public marketing page; signed-in cloud and loc
 
 ### Root documents & tooling entry points
 
-- `AGENTS.md` — agent operating instructions (`CLAUDE.md`, `GEMINI.md` point to it). `CONTEXT.md` — domain vocabulary. `DESIGN.md` / `design-qa.md` / `docs/brand/README.md` — visual design and brand (display brand **Money Watch**).
+- `AGENTS.md` — agent operating instructions. `docs/specs/` — domain vocabulary and feature behavior. `DESIGN.md` / `docs/brand/README.md` — visual design and brand (display brand **Money Watch**).
 - `docs/specs/`, `docs/adr/` — feature specs and ADRs. `docs/agents/` — agent guidance (`domain.md`, `issue-tracker.md`, `mobile-ux.md`, `product-qa.md`). `docs/qa/` — audits and test-case write-ups. `docs/mcp-setup.md`, `docs/cron-setup.md` — setup guides.
 - `package.json` — commands (`dev`, `build`, `test`, `lint`, `typecheck`, `electron:dev`, `electron:start`, `electron:package`, `release`, `supabase:start`, `email-sync:poll`, `perf:navigation`). `dev`/`start` run `scripts/prepare-cloud-database.ts` first and set `DEPLOYMENT_MODE=cloud`; `electron:start` builds with `DEPLOYMENT_MODE=local` (`scripts/electron-start-script.test.ts`).
 - `vitest.config.ts` / `src/test/vitest.setup.ts` — Vitest; the setup mocks `revalidateTag` (tests asserting form-options invalidation inject `deps.revalidate`); `revalidatePath` stays real.
@@ -81,7 +81,15 @@ Signed-out cloud visitors see the public marketing page; signed-in cloud and loc
 
 ### `src/demo-data`
 
-`generateDemoSeedData()` and `loadDemoSeedData()`, used by `/dev/seed`.
+`generate-seed-data.ts` (`generateDemoSeedData()`) and `load-demo-seed.ts` (`loadDemoSeedData()`), used by `/dev/seed`.
+
+### `src/types`
+
+`paisa-watch-desktop.d.ts` — the `window.paisaWatch` file/folder picker types for the Electron preload bridge; no runtime code.
+
+### `src/functional-qa`
+
+Ad-hoc QA suites that call real Server Actions and repositories directly (no browser): `screen-qa.test.ts` (edge cases across all UI Server Actions), `scenario-verification.test.ts` (Transfer/Transaction add, delete, duplicate, edit scenarios).
 
 ### `src/desktop`
 
@@ -137,10 +145,10 @@ English, Simplified Chinese, Arabic; locale is the `pw-locale` cookie, set in Se
 - `reconciliations/[id]/` — detail (`getDetailById`) and Discrepancy resolution (`resolution-form.tsx`, `resolve-actions.ts`).
 - `share-trading-accounts/` — `new/`, `[id]/` (Holdings + StockTransaction ledger), `[id]/edit|delete/`, `[id]/stock-transactions/new/` (mobile single form, desktop multi-row table) and `[stockTransactionId]/edit|delete/`.
 - `prototype/bulk-entry/` — dev-only interactive sample comparing three batch-entry layouts for Account Transactions and StockTransactions; all state is in memory and production returns 404.
-- `imports/` — `/imports` (Email sync vs MCP import by `batch.source`, plus the Unresolved email alerts queue with in-place correction form), `[id]/` review (edit/remove line items via the generic Transaction routes with `returnTo`, dismiss Suspected Duplicates, Confirm All gated on unresolved duplicates), `[id]/delete/` (pre-confirm delete or post-confirm undo). Confirm All and Undo are never both shown.
+- `imports/` — `/imports` (Email sync vs MCP import by `batch.source`, plus the Unresolved email alerts queue with in-place correction form backed by `resolve-unresolved-email-alert-actions.ts`), `[id]/` review (edit/remove line items via the generic Transaction routes with `returnTo`, dismiss Suspected Duplicates, Confirm All gated on unresolved duplicates), `[id]/delete/` (pre-confirm delete or post-confirm undo). Confirm All and Undo are never both shown.
 - `stock-imports/` — same shape as `imports/` for StockImportBatch.
 - `settings/mcp/page.tsx` — dedicated MCP connection setup, linked below Settings in desktop and mobile navigation; reuses the existing guide and token actions.
-- `settings/` — database path (local only; desktop pickers via `window.paisaWatch`), language (`language-form.tsx`, `locale-actions.ts`), link to the `mcp/` setup guide (`mcp-setup-section.tsx`, `mcp-connection.ts`, cloud token generate/revoke in `mcp-token-actions.ts`), and Email Alert Sync (`email-sync-settings-form.tsx`, `email-sync-actions.ts` — secrets never echoed back; status panel + Check now). `settings-copy.ts` picks desktop/self-hosted/cloud copy.
+- `settings/` — database path (local only; desktop pickers via `window.paisaWatch`; `normalize-database-path.ts` resolves directory input to a file path outside the `"use server"` module because helpers there must be async actions), language (`language-form.tsx`, `locale-actions.ts`), link to the `mcp/` setup guide (`mcp-setup-section.tsx`, `mcp-connection.ts`, cloud token generate/revoke in `mcp-token-actions.ts`), Email Alert Sync (`email-sync-settings-form.tsx`, `email-sync-actions.ts` — secrets never echoed back; status panel + Check now), and `llm-host-safety-policy.ts` (cloud SSRF guard skipped on loopback so local cloud-mode can reach Ollama). `settings-copy.ts` picks desktop/self-hosted/cloud copy.
 - `dev/seed/` — dev-only demo data loader; redirects in production.
 
 #### Auth & Login (cloud only)
