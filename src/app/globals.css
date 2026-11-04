@@ -4041,8 +4041,7 @@ p.pw-unresolved-alert-resolve {
   margin-top: 2rem;
 }
 
-.pw-marketing-primary,
-.pw-marketing-secondary {
+.pw-marketing-primary {
   display: inline-flex;
   min-height: 3.25rem;
   align-items: center;
@@ -4052,9 +4051,6 @@ p.pw-unresolved-alert-resolve {
   font-size: 0.96rem;
   font-weight: 650;
   text-decoration: none;
-}
-
-.pw-marketing-primary {
   padding: 0.7rem 1.25rem;
   background: var(--pw-ink-strong);
   color: white;
@@ -4063,14 +4059,6 @@ p.pw-unresolved-alert-resolve {
 .pw-marketing-primary:hover {
   background: var(--pw-accent-deep);
   color: white;
-}
-
-.pw-marketing-secondary {
-  color: var(--pw-ink-strong);
-}
-
-.pw-marketing-secondary:hover {
-  color: var(--pw-accent-deep);
 }
 
 .pw-marketing-trust {
@@ -4141,11 +4129,6 @@ p.pw-unresolved-alert-resolve {
   text-decoration: underline;
 }
 
-.pw-marketing-how {
-  padding-block: 3.5rem 4rem;
-  border-top: 1px solid var(--pw-border);
-}
-
 .pw-marketing-section-heading {
   max-width: 42rem;
   margin-bottom: 2rem;
@@ -4165,38 +4148,6 @@ p.pw-unresolved-alert-resolve {
   margin: 0.8rem 0 0;
   color: var(--pw-ink-muted);
   line-height: 1.7;
-}
-
-.pw-marketing-features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.pw-marketing-feature {
-  padding: 1.35rem 1.35rem 1.5rem;
-  border: 1px solid var(--pw-border);
-  border-radius: var(--pw-radius-md);
-  background: rgba(255, 255, 255, 0.54);
-}
-
-.pw-marketing-feature-number {
-  color: var(--pw-accent-deep);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.pw-marketing-feature h3 {
-  margin: 1.2rem 0 0.45rem;
-  font-size: 1.08rem;
-}
-
-.pw-marketing-feature p {
-  margin: 0;
-  color: var(--pw-ink-muted);
-  font-size: 0.9rem;
-  line-height: 1.65;
 }
 
 .pw-marketing-automation {
@@ -4640,10 +4591,6 @@ p.pw-unresolved-alert-resolve {
     max-width: 32rem;
   }
 
-  .pw-marketing-features {
-    grid-template-columns: 1fr;
-  }
-
   .pw-marketing-automation-grid,
   .pw-marketing-control,
   .pw-marketing-privacy-grid {
@@ -4653,10 +4600,6 @@ p.pw-unresolved-alert-resolve {
   .pw-marketing-automation,
   .pw-marketing-privacy {
     padding-block: 3.5rem;
-  }
-
-  .pw-marketing-feature h3 {
-    margin-top: 0.8rem;
   }
 }
 
@@ -4714,13 +4657,8 @@ p.pw-unresolved-alert-resolve {
     gap: 0.6rem;
   }
 
-  .pw-marketing-primary,
-  .pw-marketing-secondary {
+  .pw-marketing-primary {
     width: 100%;
-  }
-
-  .pw-marketing-secondary {
-    min-height: 2.75rem;
   }
 
   .pw-marketing-visual {

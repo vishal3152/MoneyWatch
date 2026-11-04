@@ -29,7 +29,6 @@ export function MarketingLanding({ t }: { t: Translator["t"] }) {
                 {t("marketing.cta")}
                 <IconArrowUpRight aria-hidden="true" size={19} />
               </Link>
-              <a className="pw-marketing-secondary" href="#how-it-works">{t("marketing.learnMore")}</a>
             </div>
             <p className="pw-marketing-trust">
               <IconShieldCheck aria-hidden="true" size={17} />
@@ -49,31 +48,6 @@ export function MarketingLanding({ t }: { t: Translator["t"] }) {
               />
               <figcaption>{t("marketing.demoCaption")}</figcaption>
             </figure>
-          </div>
-        </section>
-
-        <section className="pw-marketing-how" id="how-it-works" aria-labelledby="marketing-how-heading">
-          <div className="pw-marketing-section-heading">
-            <p className="pw-marketing-kicker">{t("marketing.howEyebrow")}</p>
-            <h2 id="marketing-how-heading">{t("marketing.howHeading")}</h2>
-            <p>{t("marketing.howLede")}</p>
-          </div>
-          <div className="pw-marketing-features">
-            <article className="pw-marketing-feature">
-              <span className="pw-marketing-feature-number">01</span>
-              <h3>{t("marketing.featureVerifyTitle")}</h3>
-              <p>{t("marketing.featureVerifyBody")}</p>
-            </article>
-            <article className="pw-marketing-feature">
-              <span className="pw-marketing-feature-number">02</span>
-              <h3>{t("marketing.featureOrganizeTitle")}</h3>
-              <p>{t("marketing.featureOrganizeBody")}</p>
-            </article>
-            <article className="pw-marketing-feature">
-              <span className="pw-marketing-feature-number">03</span>
-              <h3>{t("marketing.featureImportTitle")}</h3>
-              <p>{t("marketing.featureImportBody")}</p>
-            </article>
           </div>
         </section>
 

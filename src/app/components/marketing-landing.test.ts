@@ -15,7 +15,7 @@ describe("MarketingLanding", () => {
     expect(html).toContain("personal finance tracker");
     expect(html).toContain("Money spread across banks and currencies is hard to keep straight");
     expect(html).toContain("against the bank&#x27;s reported numbers");
-    expect(html).toContain("See each currency clearly");
+    expect(html).toContain("Use AI to prepare transactions");
     expect(html).toContain('href="/login"');
     expect(html).toContain("Sign in to Money Watch");
     expect(html).toContain('href="https://github.com/vishal3152/Money-Watch"');
