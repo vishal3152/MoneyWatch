@@ -9,7 +9,7 @@ dist/
 out/
 coverage/
 tsconfig.tsbuildinfo
-
+Screen Recording*
 # Local SQLite databases
 *.db
 *.db-journal
@@ -42,3 +42,4 @@ credentials.json
 .tmp*
 # Firebase local project link
 .firebaserc
+.vercel

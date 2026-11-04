@@ -28,7 +28,7 @@ describe("MarketingLanding", () => {
     const translator = createTranslator("en", getCatalog("en"));
     const html = renderToStaticMarkup(createElement(MarketingLanding, { t: translator.t }));
 
-    expect(html).toContain("Let your AI assistant handle the data entry");
+    expect(html).toContain("Upload a statement — skip the data entry");
     expect(html).toContain("Connect an assistant like Claude or Cursor to prepare statement imports and answer questions about your Money Watch records");
     expect(html).toContain("Ask about the transactions you have recorded");
     expect(html).toContain("Search by account, date, description, category, or money in and out");

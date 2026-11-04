@@ -41,7 +41,7 @@ export async function AppHeader() {
           <>
             <a
               className="pw-header-download"
-              href="https://github.com/vishal3152/Money-Watch/releases"
+              href="https://github.com/vishal3152/MoneyWatch/releases"
               aria-label={`${t("nav.downloadTier")}: ${t("nav.download")}`}
             >
               <IconDeviceDesktop className="pw-header-cta-icon" aria-hidden="true" stroke={1.8} />

@@ -1,7 +1,36 @@
-# Kept out of the Vercel cloud deployment: local secrets, build artifacts,
-# desktop packaging output, and docs (the cloud build needs none of these).
-.env.local
+# Keep Vercel uploads limited to files required for cloud build/runtime.
+# Local env and credentials
+.env
+.env.*
+.env*.local
+*.pem
+*.key
+credentials.json
+**/secrets/**
+
+# Build artifacts and local dependency caches
+node_modules/
+.pnpm-store/
 .next/
+.next-verify/
 dist/
+out/
+coverage/
+tsconfig.tsbuildinfo
+
+# Desktop/local-only files
 electron/
 docs/
+*.db
+*.db-journal
+Screen Recording*
+.DS_Store
+.tmp/*
+.tmp*
+
+# Local tool state
+.claude/
+.cursor/
+.impeccable/
+.impecable/
+.vercel/
