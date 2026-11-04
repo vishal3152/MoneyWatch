@@ -6,6 +6,8 @@
 
 **Know exactly where your money is — to the paise.**
 
+[![Audited with Cloudflare security-audit-skill](https://img.shields.io/badge/security_audit-Cloudflare-F38020?style=flat&logo=cloudflare&logoColor=white)](https://github.com/cloudflare/security-audit-skill)
+
 Money Watch is a personal system of record for money held across multiple institutions and currencies — built to _verify_ balances, not just display them.
 
 [Hosted app](https://money-watch-me.vercel.app/) · [Run it locally](#a-local--this-machine-sqlite-simplest) · [Self-host it](#b-self-hosted--your-server-or-nas-sqlite) · [Cloud mode](#c-cloud-hosted--vercel--supabase-postgres-multi-user) · [Architecture](#architecture) · [FAQ](#faq)
