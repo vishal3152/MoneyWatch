@@ -71,17 +71,7 @@ Three setups, same codebase. Pick one.
 
 ### A. Local — this machine, SQLite (simplest)
 
-**Prerequisites:** [Node.js 22](https://nodejs.org) (the project target) and [pnpm](https://pnpm.io/installation). Run the commands below from a checkout of this repository.
-
-```bash
-pnpm install
-DEPLOYMENT_MODE=local pnpm exec next dev
-# → http://localhost:3000
-```
-
-**No `.env` file is required for local mode** — the database is created and migrated automatically on first use. Its default is `./money-watch.db`, unless `DATABASE_PATH` or a saved Settings path selects another file. No sign-in, API keys or Docker are required for the core app. File syncing and backups are external to Money Watch; see the backup FAQ.
-
-Prefer a native window? Check the [releases page](https://github.com/vishal3152/MoneyWatch/releases) for available installers and their platform/architecture. Or run it from source: `pnpm electron:dev` starts the desktop app, `pnpm electron:start` runs it against a production build (the database migrates on start either way). **The Electron desktop app is always local** — it forces `DEPLOYMENT_MODE=local`, has no storage-mode switch, and never loads the Supabase SDK. ([ADR-0007](docs/adr/0007-electron-desktop-is-local-only.md))
+ Check the [releases page](https://github.com/vishal3152/MoneyWatch/releases) for available installers and their platform/architecture. Or run it from source: `pnpm electron:dev` starts the desktop app, `pnpm electron:start` runs it against a production build (the database migrates on start either way). **The Electron desktop app is always local** — it forces `DEPLOYMENT_MODE=local`, has no storage-mode switch, and never loads the Supabase SDK. ([ADR-0007](docs/adr/0007-electron-desktop-is-local-only.md))
 
 > ⚠️ **Heads-up:** the `dev` and `start` scripts in `package.json` are wired for **cloud** mode (they run the Postgres migration step and set `DEPLOYMENT_MODE=cloud`). For local SQLite mode in a browser, set `DEPLOYMENT_MODE=local` explicitly when building and running `pnpm exec next dev` / `pnpm exec next start`. `VERCEL=1` independently selects cloud mode, so these local commands are for non-Vercel environments.
 
