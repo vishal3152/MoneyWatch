@@ -1,0 +1,7 @@
+# Kept out of the Vercel cloud deployment: local secrets, build artifacts,
+# desktop packaging output, and docs (the cloud build needs none of these).
+.env.local
+.next/
+dist/
+electron/
+docs/

@@ -4,6 +4,8 @@
 
 Money Watch is a local-first personal finance tracker. Record bank accounts, transactions, transfers, fixed deposits, and share trades. Reconcile every account against its real statement balance. Import from bank alerts automatically. Your data lives in a SQLite file you control — no bank logins, no cloud required.
 
+> **Coolest trick:** upload a bank statement (CSV/PDF) to your favourite AI assistant — Claude, Cursor, or any MCP-compatible client — and it sets up the missing institution and account (with your confirmation) and files every transaction as a reviewable draft. Zero data entry. See [MCP: let your AI assistant do the data entry](#mcp-let-your-ai-assistant-do-the-data-entry).
+
 ## What it does
 
 - **Accounts & institutions** — group bank accounts under institutions, with per-currency balances.
@@ -70,6 +72,8 @@ For local Postgres dev: `pnpm supabase:start` spins up a local Supabase stack an
 Two ways to get transactions in without manual entry. Both produce **drafts** — nothing enters your ledger until you review and confirm it. Suspected duplicates are flagged, and confirmation is blocked until you resolve them.
 
 ### MCP: let your AI assistant do the data entry
+
+Just upload your bank statement to Claude, Cursor, or any MCP-compatible client — no forms to fill. The assistant reads the statement, creates the institution and account when they don't exist yet (only with your explicit confirmation), and files every transaction as a draft import for you to review and confirm. Nothing enters your ledger until you say so.
 
 Money Watch exposes an MCP server at `/api/mcp` with tools to stage statement imports (`stage_import`, `commit_import`), manage accounts, and search recorded transactions (`search_transactions`).
 

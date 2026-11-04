@@ -104,7 +104,7 @@ export function TransactionForm({
   }
 
   return (
-    <div className="pw-transaction-entry">
+    <div className={isEdit ? "pw-transaction-entry pw-transaction-entry--edit" : "pw-transaction-entry"}>
     <form key={state.formKey ?? "new"} className="pw-card pw-transaction-single" action={formAction} noValidate>
       <BackLink href={`/accounts/${accountId}`} label={t("transactions.backToAccount")} />
       <h1>{isEdit ? t("transactions.edit.heading") : t("transactions.new.heading")}</h1>

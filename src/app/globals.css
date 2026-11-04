@@ -621,6 +621,13 @@ a:hover {
   }
 }
 
+/* Edit pages render only the single form (no batch table to swap to), so the
+   desktop swap above must not hide it — otherwise only the delete link below
+   the form remains visible. */
+.pw-transaction-entry--edit .pw-transaction-single {
+  display: block;
+}
+
 .pw-card h1 {
   margin: 0 0 1.75rem;
   font-family: var(--pw-font-display);
@@ -3224,6 +3231,49 @@ p.pw-unresolved-alert-resolve {
 .pw-import-line-actions {
   margin-top: 0;
   padding: 0 0.85rem 0.65rem;
+  align-items: center;
+  gap: 0.35rem 1.1rem;
+}
+
+/* Per-line import review actions are tertiary row controls, not batch-level
+   CTAs: quiet text links instead of full-size chips, so a long import does
+   not repeat a large button under every line item. Touch target stays
+   2.75rem, matching .pw-back-link/.pw-text-link-trigger. */
+.pw-import-line-actions a,
+.pw-import-line-actions button.pw-action-chip {
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pw-ink-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  background: none;
+  border: 0;
+  border-radius: var(--pw-radius-sm);
+}
+
+.pw-import-line-actions a.pw-danger-link {
+  color: var(--pw-danger);
+  border-color: transparent;
+}
+
+@media (hover: hover) {
+  .pw-import-line-actions a:hover {
+    color: var(--pw-ink);
+    background: none;
+  }
+
+  .pw-import-line-actions a.pw-danger-link:hover {
+    color: color-mix(in srgb, var(--pw-danger) 85%, black);
+    background: none;
+  }
+
+  .pw-import-line-actions button.pw-action-chip:hover {
+    color: var(--pw-ink);
+    background: none;
+  }
 }
 
 .pw-ledger-row .pw-item-title {
@@ -3732,6 +3782,14 @@ p.pw-unresolved-alert-resolve {
   .pw-actions > form {
     flex: 1 1 calc(50% - 0.65rem);
     justify-content: center;
+  }
+
+  /* Per-line import actions stay compact inline links on narrow screens too —
+     they must not stretch into half-width buttons. */
+  .pw-import-line-actions a,
+  .pw-import-line-actions > form {
+    flex: none;
+    justify-content: flex-start;
   }
 
   .pw-actions > form .pw-button {

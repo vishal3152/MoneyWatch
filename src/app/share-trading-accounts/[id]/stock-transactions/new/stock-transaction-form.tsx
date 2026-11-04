@@ -86,7 +86,7 @@ export function StockTransactionForm({
   );
 
   return (
-    <div className="pw-transaction-entry">
+    <div className={isEdit ? "pw-transaction-entry pw-transaction-entry--edit" : "pw-transaction-entry"}>
     <form key={state.formKey ?? "new"} className="pw-card pw-transaction-single" action={formAction} noValidate>
       <BackLink href={`/share-trading-accounts/${shareTradingAccountId}`} label={t("transactions.backToAccount")} />
       <h1>{isEdit ? t("stockTransactions.edit.heading") : t("stockTransactions.new.heading")}</h1>
