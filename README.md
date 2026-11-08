@@ -10,7 +10,7 @@
 
 Money Watch is a personal system of record for money held across multiple institutions and currencies — built to _verify_ balances, not just display them.
 
-[Hosted app](https://money-watch-me.vercel.app/) · [Run it locally](#a-local--this-machine-sqlite-simplest) · [Self-host it](#b-self-hosted--your-server-or-nas-sqlite) · [Cloud mode](#c-cloud-hosted--vercel--supabase-postgres-multi-user) · [Architecture](#architecture) · [FAQ](#faq)
+[Live app](https://money-watch-me.vercel.app/) · [Run it locally](#a-local--this-machine-sqlite-simplest) · [Self-host it](#b-self-hosted--your-server-or-nas-sqlite) · [Cloud mode](#c-cloud-hosted--vercel--supabase-postgres-multi-user) · [Architecture](#architecture) · [FAQ](#faq)
 
 </div>
 
